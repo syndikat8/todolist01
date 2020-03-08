@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.css';
-import TodoListHeader from "./components/TodoListHeader/TodoListHeader";
-import TodoListTasks from "./components/TodoListTasks/TodoListTasks";
-import TodoListFooter from "./components/TodoListFooter/TodoListFooter";
+
+
+import TodoListHeader from "./TodoListHeader";
+import TodoListTasks from "./TodoListTasks";
+import TodoListFooter from "./TodoListFooter";
 
 class App extends React.Component {
   render = () => {
