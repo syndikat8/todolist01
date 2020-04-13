@@ -54,7 +54,7 @@ class App extends React.Component {
     let newTasks = [...this.state.tasks, newTask];
     this.setState({
       tasks: newTasks
-    }, this.saveState)
+    }, () => {this.saveState()})
   };
 
   changeFilter = (newFilterValue) => {
@@ -88,7 +88,20 @@ class App extends React.Component {
     this.changeTask(taskId, {title: newTitle})
   };
 
-
+  deliteTask = (taskId) => {
+    this.setState(({tasks}) => {
+      const idx = tasks.findIndex((el) => el.id === taskId)
+      const newTasks = [
+        ...tasks.slice(0, idx),
+        ...tasks.slice(idx + 1),
+      ]
+      return {
+        tasks: newTasks
+      }
+    }, () => {
+      this.saveState()
+    })
+  }
   render = () => {
 
     return (
@@ -96,6 +109,7 @@ class App extends React.Component {
         <div className="todoList">
           <TodoListHeader addTask={this.addTask}/>
           <TodoListTasks
+            deliteTask={this.deliteTask}
             changeTitle={this.changeTitle}
             changeStatus={this.changeStatus}
             tasks={this.state.tasks.filter(t => {
