@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-class TodoListHeader extends React.Component {
+class AddNewItemForm extends React.Component {
 
 
   state = {
@@ -10,15 +10,16 @@ class TodoListHeader extends React.Component {
   };
 
 
-  onAddTaskClick = () => {
+  onAddItemClick = () => {
     let newTitle = this.state.title;
-    this.setState({title: ""});
+
     if (newTitle === "") {
       this.setState({error: true})
     } else {
-      this.setState({error: false})
+      this.setState({error: false,title: ""})
+      this.props.addItem(newTitle)
     }
-    this.props.addTask(newTitle)
+
   };
 
   onTitleChanged = (e) => {
@@ -31,7 +32,7 @@ class TodoListHeader extends React.Component {
   onKeyPress = (e) => {
   this.setState({eror: false});
     if(e.key === "Enter") {
-      this.onAddTaskClick()
+      this.onAddItemClick()
     }
 
   };
@@ -42,23 +43,20 @@ class TodoListHeader extends React.Component {
     let classNameInput = this.state.error ? "error" : "";
 
     return (
-      <div className="todoList-header">
-        <h3 className="todoList-header__title">What to Learn</h3>
         <div className="todoList-newTaskForm">
           <input
                  type="text"
-                 placeholder="New task name"
+                 placeholder="New item name"
                  className={classNameInput}
                  onChange={this.onTitleChanged}
                  onKeyPress={this.onKeyPress}
                  value={this.state.title}
           />
-          <button onClick={this.onAddTaskClick}>Add</button>
+          <button onClick={this.onAddItemClick}>Add</button>
         </div>
-      </div>
     );
   }
 }
 
-export default TodoListHeader;
+export default AddNewItemForm;
 
