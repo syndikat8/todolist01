@@ -34,13 +34,6 @@ componentDidMount() {
       }
     } )
 
-// let newTodo = {
-    //   title: todolistName,
-    //   id: this.nextTodoListId,
-    //   tasks: []
-    // }
-    // this.nextTodoListId++;
-
   }
 
   render = () => {
