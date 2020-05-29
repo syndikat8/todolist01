@@ -40,7 +40,7 @@ componentDidMount() {
 
 const mapStateToProps = (state) => {
   return {
-    todolists: state.todolists
+    todolists: state.todolist.todolists
   }
 }
 

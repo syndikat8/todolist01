@@ -40,7 +40,7 @@ const initialState = {
   ]
 }
 
-const reducer = (state = initialState, action) => {
+const todolistReducer = (state = initialState, action) => {
   let newTasks
   switch (action.type) {
     case SET_TODOLIST:
@@ -209,4 +209,4 @@ export const changeTitle = (taskId, task, newTitle) => (dispatch) => {
     })
 }
 
-export default reducer;
+export default todolistReducer;
