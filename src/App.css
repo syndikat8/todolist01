@@ -67,3 +67,7 @@
 .show:hover {
     color: gold;
 }
+
+.todoList-newTaskForm {
+    margin: 10px;
+}
