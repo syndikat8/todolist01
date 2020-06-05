@@ -2,6 +2,7 @@ import React from 'react';
 import TodoListTask from "./TodoListTask/TodoListTask";
 import { TaskType } from '../../types/entities';
 
+
 type OnPropsType = {
     tasks: Array<TaskType>
     deliteTask: () => void

@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
+import {TaskType} from "../../../types/entities";
 
+type StateType = {
+  editeMode: boolean
+}
 
-class TodoListTask extends React.Component {
+type OnPropsType = {
+    task: TaskType
+    changeTitle: (task: TaskType, event: any)=> void
+    changeStatus: (task: TaskType, event: any)=> void
+    deliteTask: (id: string)=> void
+}
 
-  state = {
+class TodoListTask extends React.Component<OnPropsType,StateType> {
+
+  state: StateType = {
     editeMode: false
   }
   activateEditMode = () => {
     this.setState({editeMode: true})
   }
-  deActivateEditMode = (e) => {
+  deActivateEditMode = (e:any) => {
     debugger
     this.props.changeTitle(this.props.task, e.currentTarget.value)
     this.setState({editeMode: false})
   }
-  onIsDoneChanged = (e) => {
+  onIsDoneChanged = (e: ChangeEvent<HTMLInputElement>) => {
     this.props.changeStatus(this.props.task, e.currentTarget.checked ? 2 : 0);
   };
 
