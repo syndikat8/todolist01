@@ -1,14 +1,24 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
+type StateType = {
+  editeMode: boolean
+  title: string
+}
 
-class TodoListTitle extends React.Component {
+type OnPropsType = {
+  changeTodolistTitle: (newText: string)=> void
+  deleteTodolist: ()=> void
+  title: string
+}
 
-  state = {
+class TodoListTitle extends React.Component<OnPropsType,StateType> {
+
+  state: StateType = {
     editeMode: false,
     title: this.props.title
   }
 
-  onTitleChange = (e) => {
+  onTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({title: e.currentTarget.value})
   }
 
