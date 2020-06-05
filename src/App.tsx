@@ -38,14 +38,14 @@ class App extends React.Component<PropsType> {
         })
 
         return (
-            <>
+            <div className="App" >
                 <div>
                     <AddNewItemForm addItem={this.addTodoList}/>
                 </div>
-                <div className="App">
+                <div className="App-todo">
                     {todoLists}
                 </div>
-            </>
+            </div>
         );
     }
 }

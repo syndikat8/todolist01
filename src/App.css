@@ -1,45 +1,69 @@
-.App {
-  display: flex;
-  flex-direction: row;
+.App-todo {
+    display: flex;
 }
 
-
 .todoList {
-  width: 300px;
-  margin: 0 auto;
+    width: 300px;
+    margin: 10px;
+    border: 1px solid #000;
+}
+
+.todoList-header-title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #000;
 }
 
 .todoList > div {
-  padding: 10px;
+    padding: 10px;
 }
 
 .todoList-task {
+    padding: 5px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
 
+.todoList-task:hover {
+    background-color: darkgrey;
 }
 
 .todoList-task.done {
-  opacity: 0.5;
+    opacity: 0.5;
 }
 
 .filter-active {
-  background-color: blue;
+    background-color: blue;
+}
+
+.filter-active:hover {
+    opacity: 0.7;
 }
 
 .error {
-  border-color: red;
+    border-color: red;
 }
 
 .delit {
-  font-size: 15px;
-  font-weight: bolder;
-  color: black;
-  background: red;
-  border: none;
-  border-radius: 10px;
+    font-size: 15px;
+    font-weight: bolder;
+    color: #000;
+    background: rgb(131, 140, 145);
+    border: none;
 }
 
 .todolist-item {
-  display: flex;
-
+    display: flex;
 }
 
+.hide:hover {
+    color: gold;
+}
+.show:hover {
+    color: gold;
+}

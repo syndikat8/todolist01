@@ -53,7 +53,7 @@ class AddNewItemForm extends React.Component<OnPropsType,StateType> {
         <div className="todoList-newTaskForm">
           <input
                  type="text"
-                 placeholder="New item name"
+                 placeholder="Введите название"
                  className={classNameInput}
                  onChange={this.onTitleChanged}
                  onKeyPress={this.onKeyPress}

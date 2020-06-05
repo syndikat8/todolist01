@@ -23,13 +23,13 @@ class TodoListFooter extends React.Component {
     return (
       <div className="todoList-footer">
         {!this.state.isHidden && <div>
-          <button className={classForAll} onClick={this.onAllFilterClick}>All</button>
-          <button className={classForCompleted} onClick={this.onCompletedFilterClick}>Completed</button>
-          <button className={classForActive} onClick={this.onActiveFilterClick}>Active</button>
+          <button className={classForAll} onClick={this.onAllFilterClick}>Все</button>
+          <button className={classForCompleted} onClick={this.onCompletedFilterClick}>Выполненые</button>
+          <button className={classForActive} onClick={this.onActiveFilterClick}>Активные</button>
         </div>
         }
-       { !this.state.isHidden && <span onClick={this.onHideFiltersClick} >hide</span>}
-       { this.state.isHidden && <span onClick={this.onShowFiltersClick} >show</span>}
+       { !this.state.isHidden && <span className="hide" onClick={this.onHideFiltersClick}>Скрыть фильтр</span>}
+       { this.state.isHidden && <span className="show" onClick={this.onShowFiltersClick}>Показать фильтр</span>}
       </div>
     );
   }

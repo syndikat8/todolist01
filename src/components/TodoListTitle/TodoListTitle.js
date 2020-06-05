@@ -22,20 +22,26 @@ class TodoListTitle extends React.Component {
   }
   render = () => {
 
-    return <h3 className="todoList-header__title">
+    return (
+      <div className="todoList-header-title">
+        <div>
+          {this.state.editeMode
+            ? <input
+              value={this.state.title}
+              type="text"
+              autoFocus={true}
+              onChange={this.onTitleChange}
+              onBlur={this.deActivateEditMode}
+            />
+            : <span onClick={this.activateEditMode}>{this.state.title}</span>
+          }
+        </div>
+        <div>
+          <button className="delit" onClick={this.props.deleteTodolist}>X</button>
+        </div>
 
-      {this.state.editeMode
-        ? <input
-          value={this.state.title}
-          type="text"
-          autoFocus={true}
-          onChange={this.onTitleChange}
-          onBlur={this.deActivateEditMode}
-        />
-        : <span onClick={this.activateEditMode}>{this.state.title}</span>
-      }
-      <button onClick={this.props.deleteTodolist}>Delete</button>
-    </h3>
+      </div>
+    )
   }
 }
 

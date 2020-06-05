@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #ffffff;
+  height: 100vh;
+  width: 100%;
+  background: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2401x1600/cd1ad5defc2527bdccd1b8e7d5cb647c/photo-1576000613930-4c17d9948918.jpg") no-repeat center / cover;
+
 }
 
 code {
