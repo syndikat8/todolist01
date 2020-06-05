@@ -1,4 +1,7 @@
 import api from "../api/api";
+import {TaskType, TodoType, UpdateTaskType} from "../types/entities";
+import {Dispatch} from "redux";
+
 
 export const ADD_TODOLIST = "todolist/reducer/ADD_TODOLIST"
 export const ADD_TASK = "todolist/reducer/ADD_TASK"
@@ -10,37 +13,18 @@ export const SET_TODOLIST = "todolist/reducer/SET_TODOLIST"
 export const CHANGE_TODOLIST_TITLE = "todolist/reducer/CHANGE_TODOLIST_TITLE"
 
 
-const initialState = {
-  todolists: [
-    // {
-    //   id: 1, title: "Gym", tasks: [
-    //     {id: 0, title: "JS", isDone: true, priority: "low"},
-    //   ]
-    // },
-    // {
-    //   id: 2, title: "IT", tasks: [
-    //     {id: 0, title: "JS", isDone: true, priority: "low"},
-    //     {id: 1, title: "CSS", isDone: true, priority: "low"},
-    //   ]
-    // },
-    // {
-    //   id: 3, title: "Every Day", tasks: [
-    //     {id: 3, title: "React", isDone: false, priority: "low"},
-    //     {id: 4, title: "Sass", isDone: false, priority: "low"},
-    //     {id: 5, title: "Redux", isDone: false, priority: "low"}
-    //   ]
-    // },
-    // {
-    //   id: 4, title: "Boss", tasks: [
-    //     {id: 0, title: "JS", isDone: true, priority: "low"},
-    //     {id: 1, title: "CSS", isDone: true, priority: "low"},
-    //
-    //   ]
-    // },
-  ]
+
+type InitialStateType = {
+  todolists: Array<TodoType>
 }
 
-const todolistReducer = (state = initialState, action) => {
+const initialState: InitialStateType = {
+  todolists: []
+}
+
+
+
+const todolistReducer = (state: InitialStateType = initialState, action:TodoActionTypes): InitialStateType => {
   let newTasks
   switch (action.type) {
     case SET_TODOLIST:
@@ -126,24 +110,84 @@ const todolistReducer = (state = initialState, action) => {
   return state;
 }
 
-export const setTodoList = (todolists) => ({type: SET_TODOLIST, todolists})
-export const addTodoList = (newTodolist) => ({type: ADD_TODOLIST, newTodolist})
-export const deleteTodolist = (todolistId) => ({type: DELETE_TODOLIST, todolistId})
-export const changeTodolistTitle = (todolistId,newTitle) => ({type: CHANGE_TODOLIST_TITLE, newTitle, todolistId})
+export default todolistReducer;
 
-export const setTasks = (tasks, todolistId) => ({type: SET_TASKS, tasks, todolistId})
-export const addTask = (newTask, todolistId) => ({type: ADD_TASK, newTask, todolistId})
-export const deleteTask = (taskId, todolistId) => ({type: DELETE_TASK, taskId, todolistId})
-export const changeTask = (todolistId, taskId, obj) => ({type: CHANGE_TASK, todolistId, taskId, obj})
+type TodoActionTypes =
+    AddTodolistType
+    | SetTodolistType
+    | DeleteTodolistType
+    | ChangeTodolistTitleType
+    | SetTasksType
+    | AddTaskType
+    | DeleteTaskType
+    | ChangeTaskType
+
+type AddTodolistType = {
+  type: typeof ADD_TODOLIST
+  newTodolist: TodoType
+}
+export const addTodoList = (newTodolist: TodoType): AddTodolistType => ({type: ADD_TODOLIST, newTodolist})
+
+type SetTodolistType = {
+  type: typeof SET_TODOLIST
+  todolists: Array<TodoType>
+}
+export const setTodoList = (todolists: Array<TodoType>): SetTodolistType => ({type: SET_TODOLIST, todolists})
+
+type DeleteTodolistType = {
+  type: typeof DELETE_TODOLIST
+  todolistId: string
+}
+export const deleteTodolist = (todolistId:string): DeleteTodolistType => ({type: DELETE_TODOLIST, todolistId})
+
+type ChangeTodolistTitleType = {
+  type: typeof CHANGE_TODOLIST_TITLE
+  todolistId: string
+  newTitle: string
+}
+export const changeTodolistTitle = (todolistId:string, newTitle:string): ChangeTodolistTitleType => ({type: CHANGE_TODOLIST_TITLE, newTitle, todolistId})
+
+type SetTasksType = {
+  type: typeof SET_TASKS
+  tasks: Array<TaskType>
+  todolistId: string
+}
+export const setTasks = (tasks: Array<TaskType>, todolistId:string): SetTasksType => ({type: SET_TASKS, tasks, todolistId})
+
+type AddTaskType = {
+  type: typeof ADD_TASK
+  newTask: TaskType
+  todolistId: string
+}
+export const addTask = (newTask: TaskType, todolistId:string): AddTaskType => ({type: ADD_TASK, newTask, todolistId})
+
+type DeleteTaskType = {
+  type: typeof DELETE_TASK
+  taskId: string
+  todolistId: string
+}
+export const deleteTask = (taskId:string, todolistId:string): DeleteTaskType => ({type: DELETE_TASK, taskId, todolistId})
+
+type ChangeTaskType = {
+  type: typeof CHANGE_TASK
+  todolistId: string
+  taskId: string
+  obj: UpdateTaskType
+}
+export const changeTask = (todolistId:string, taskId:string, obj: UpdateTaskType): ChangeTaskType => ({type: CHANGE_TASK, todolistId, taskId, obj})
 
 
-export const getTodolist = () => (dispatch) => {
+
+
+
+
+export const getTodolist = () => (dispatch: Dispatch<TodoActionTypes>) => {
   api.getTodolist()
     .then(res => {
       dispatch(setTodoList(res.data));
     });
 }
-export const addTodolist = (title) => (dispatch) => {
+export const addTodolist = (title: string) => (dispatch: Dispatch<TodoActionTypes>) => {
   api.createTodolist(title)
     .then(response => {
     if (response.data.resultCode === 0) {
@@ -151,7 +195,7 @@ export const addTodolist = (title) => (dispatch) => {
     }
   } )
 }
-export const deleteTodo = (todolistId) => (dispatch) => {
+export const deleteTodo = (todolistId: string) => (dispatch: Dispatch<TodoActionTypes>) => {
   api.deleteTodo(todolistId)
     .then(response => {
       if (response.data.resultCode === 0) {
@@ -159,7 +203,7 @@ export const deleteTodo = (todolistId) => (dispatch) => {
       }
     })
 }
-export const updateTodolistTitle = (taskId, newTitle) => (dispatch) => {
+export const updateTodolistTitle = (taskId: string, newTitle: string) => (dispatch: Dispatch<TodoActionTypes>) => {
   api.updateTodolistTitle(taskId,newTitle)
     .then(response => {
       if (response.data.resultCode === 0) {
@@ -168,13 +212,13 @@ export const updateTodolistTitle = (taskId, newTitle) => (dispatch) => {
     })
 }
 
-export const getTasks = (taskId) => (dispatch) => {
+export const getTasks = (taskId: string) => (dispatch: Dispatch<TodoActionTypes>) => {
   api.getTasks(taskId)
     .then(response => {
       dispatch(setTasks(response.data.items, taskId))
     })
 }
-export const addTsk = (newTitle,taskId) => (dispatch) => {
+export const addTsk = (newTitle: string,taskId: string) => (dispatch: Dispatch<TodoActionTypes>) => {
   api.createTask(taskId, newTitle)
     .then(response => {
       if (response.data.resultCode === 0) {
@@ -182,7 +226,7 @@ export const addTsk = (newTitle,taskId) => (dispatch) => {
       }
     })
 }
-export const deletaTask = (todolistId,taskId) => (dispatch) => {
+export const deletaTask = (todolistId: string, taskId: string) => (dispatch: Dispatch<TodoActionTypes>) => {
   api.deleteTask(todolistId, taskId)
     .then(response => {
       if (response.data.resultCode === 0) {
@@ -190,7 +234,7 @@ export const deletaTask = (todolistId,taskId) => (dispatch) => {
       }
     })
 }
-export const changeStatus = (todolistId, task, status) => (dispatch) => {
+export const changeStatus = (todolistId: string, task: TaskType, status: number) => (dispatch: Dispatch<TodoActionTypes>) => {
   api.changeStatus(todolistId, task, status)
     .then(response => {
       if (response.data.resultCode === 0) {
@@ -198,7 +242,7 @@ export const changeStatus = (todolistId, task, status) => (dispatch) => {
       }
     })
 }
-export const changeTitle = (taskId, task, newTitle) => (dispatch) => {
+export const changeTitle = (taskId: string, task: TaskType, newTitle: string) => (dispatch: Dispatch<TodoActionTypes>) => {
   debugger
   api.changeTitle(taskId, task, newTitle)
     .then(response => {
@@ -209,4 +253,3 @@ export const changeTitle = (taskId, task, newTitle) => (dispatch) => {
     })
 }
 
-export default todolistReducer;

@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { ChangeEvent,KeyboardEvent } from 'react';
+
+type StateType = {
+  error: boolean
+  title: string
+}
+
+type OnPropsType = {
+  addItem: (newText: string)=> void
+}
+//Если есть локальный стейт и пропсы. То первым передаем пропсы
+class AddNewItemForm extends React.Component<OnPropsType,StateType> {
 
 
-class AddNewItemForm extends React.Component {
-
-
-  state = {
+  state: StateType = {
     error: false,
     title: "",
   };
@@ -22,15 +30,14 @@ class AddNewItemForm extends React.Component {
 
   };
 
-  onTitleChanged = (e) => {
+  onTitleChanged = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       error: false,
       title: e.currentTarget.value
     })
   };
 
-  onKeyPress = (e) => {
-  this.setState({eror: false});
+  onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if(e.key === "Enter") {
       this.onAddItemClick()
     }
