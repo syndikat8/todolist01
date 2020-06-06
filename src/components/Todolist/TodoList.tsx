@@ -86,7 +86,6 @@ class TodoList extends React.Component<PropsType,StateType> {
           <div className="todoList-header">
             <div className="todolist-item">
               <TodoListTitle
-                // id={this.props.id}
                 changeTodolistTitle={this.changeTodolistTitle}
                 deleteTodolist={this.deleteTodolist}
                 title={this.props.title}/>
