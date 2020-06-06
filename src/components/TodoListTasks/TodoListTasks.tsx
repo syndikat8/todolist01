@@ -5,9 +5,9 @@ import { TaskType } from '../../types/entities';
 
 type OnPropsType = {
     tasks: Array<TaskType>
-    deliteTask: () => void
-    changeTitle: () => void
-    changeStatus: () => void
+    deliteTask: (taskId: string) => void
+    changeTitle: (task: TaskType, newTitle: string) => void
+    changeStatus: (task: TaskType, status: number) => void
 }
 
 
