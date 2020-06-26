@@ -6,12 +6,8 @@ import {connect} from "react-redux";
 import {addTodolist, getTodolist} from "./redux/reducer";
 import {AppStateType} from './redux/store';
 import {TodoType} from "./types/entities";
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar} from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
-import {Container, Grid, Paper} from "@material-ui/core";
 
 type MapDispatchPropsType = {
     getTodolist: () => void
