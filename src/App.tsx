@@ -6,6 +6,12 @@ import {connect} from "react-redux";
 import {addTodolist, getTodolist} from "./redux/reducer";
 import {AppStateType} from './redux/store';
 import {TodoType} from "./types/entities";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import {Container, Grid, Paper} from "@material-ui/core";
 
 type MapDispatchPropsType = {
     getTodolist: () => void
@@ -38,13 +44,25 @@ class App extends React.Component<PropsType> {
         })
 
         return (
-            <div className="App" >
-                <div>
-                    <AddNewItemForm addItem={this.addTodoList}/>
-                </div>
-                <div className="App-todo">
-                    {todoLists}
-                </div>
+            <div className="App">
+                <AppBar position="static">
+                    <Toolbar style={{display: "flex", justifyContent: "space-between", background: "#1a746b"}}>
+                        <IconButton edge="start" color="inherit" aria-label="menu">
+                            <MenuIcon/>
+                        </IconButton>
+                        <Button color="inherit">Login</Button>
+                    </Toolbar>
+                </AppBar>
+                <Container fixed>
+                    <Grid container style={{padding: "20px 0"}}>
+                        <Paper elevation={5} style={{padding: "10px", background: "#d3ebd3"}}>
+                            <AddNewItemForm addItem={this.addTodoList}/>
+                        </Paper>
+                    </Grid>
+                    <Grid container spacing={4}>
+                        {todoLists}
+                    </Grid>
+                </Container>
             </div>
         );
     }

@@ -1,5 +1,7 @@
 import React, {ChangeEvent} from 'react';
 import {TaskType} from "../../../types/entities";
+import {Checkbox, Container, Grid, IconButton, Paper, TextField} from "@material-ui/core";
+import {Delete} from "@material-ui/icons";
 
 type StateType = {
     editeMode: boolean
@@ -34,27 +36,28 @@ class TodoListTask extends React.Component<OnPropsType, StateType> {
     }
     render = () => {
         let isDone = this.props.task.status === 2;
-        let taskIsDoneClass = isDone ? "todoList-task done" : "todoList-task";
+
         return (
-            <div className={taskIsDoneClass}>
-                <div>
-                    <input
-                        type="checkbox"
-                        checked={isDone}
-                        onChange={this.onIsDoneChanged}/>
-                    {this.state.editeMode
-                        ? <input
-                            defaultValue={this.props.task.title}
-                            autoFocus={true}
-                            onBlur={this.deActivateEditMode}/>
-                        : <span onClick={this.activateEditMode}> {this.props.task.title}</span>}
-                    <span> приоритет: {this.props.task.priority} </span>
-                </div>
-                <div>
-                    <button className="delit" onClick={this.onDeliteTask}>x</button>
-                </div>
-            </div>
-        );
+            <Container fixed>
+                <Paper elevation={10} style={{margin: "10px", background: "#c1ff7a"}}>
+                    <div >
+                        <Checkbox
+                            color="primary"
+                            checked={isDone}
+                            onChange={this.onIsDoneChanged}/>
+                        {this.state.editeMode
+                            ? <TextField
+                                defaultValue={this.props.task.title}
+                                autoFocus={true}
+                                onBlur={this.deActivateEditMode}/>
+                            : <span onClick={this.activateEditMode}> {this.props.task.title}</span>}
+                        <IconButton color={"secondary"} onClick={this.onDeliteTask}>
+                            <Delete/>
+                        </IconButton>
+                    </div>
+                </Paper>
+            </Container>
+        )
     }
 }
 
