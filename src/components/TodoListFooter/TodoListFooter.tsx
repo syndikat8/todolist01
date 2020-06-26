@@ -39,16 +39,16 @@ class TodoListFooter extends React.Component<OnPropsType, StateType> {
             <div style={{paddingTop: "15px"}}>
                 {!this.state.isHidden && <div>
                   <Button variant={this.props.filterValue === "All" ? "contained" : "text"}
-                          onClick={this.onAllFilterClick}>Все</Button>
+                          onClick={this.onAllFilterClick}>all</Button>
                   <Button variant={this.props.filterValue === "Completed" ? "contained" : "text"} color={"primary"}
-                          onClick={this.onCompletedFilterClick}>Выполненые</Button>
+                          onClick={this.onCompletedFilterClick}>Completed</Button>
                   <Button variant={this.props.filterValue === "Active" ? "contained" : "text"} color={"secondary"}
-                          onClick={this.onActiveFilterClick}>Активные</Button>
+                          onClick={this.onActiveFilterClick}>Active</Button>
                 </div>
                 }
                 <div style={{paddingTop: "10px"}}>
-                    {!this.state.isHidden && <span className="hide" onClick={this.onHideFiltersClick}>Скрыть фильтр</span>}
-                    {this.state.isHidden && <span className="show" onClick={this.onShowFiltersClick}>Показать фильтр</span>}
+                    {!this.state.isHidden && <Button className="hide" onClick={this.onHideFiltersClick}>hide</Button >}
+                    {this.state.isHidden && <Button className="show" onClick={this.onShowFiltersClick}>show</Button >}
                 </div>
             </div>
         );
